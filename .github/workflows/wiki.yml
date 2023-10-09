@@ -10,13 +10,15 @@ on:
   push:
 
 jobs:
-    sync_docs:
+    sync_wiki:
       name: Sync Wiki
       runs-on: ubuntu-latest
       steps:
         - name: Checkout current version
           uses: actions/checkout@v2
-        - name: Sync with local action
+        - name: Rename README
+          run: mv README.md Home.md
+        - name: Sync with Wiki
           uses: kai-tub/external-repo-sync-action@v1
           with:
             source-directory: "."
