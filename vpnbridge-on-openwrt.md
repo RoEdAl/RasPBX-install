@@ -670,7 +670,18 @@ You must find *POSIX timezone string* for your timezone. Check [timezone databas
 # Europe/Warsaw timezone
 uci set system.@system[0].timezone='CET-1CEST,M3.5.0,M10.5.0/3'
 uci commit
-reboot
+
+service sysntpd reload
+```
+
+You may also configure DHCP to serve timezone:
+
+```sh
+uci add_list dhcp.lan.dhcp_option=option:posix-timezone,CET-1CEST,M3.5.0,M10.5.0/3
+uci add_list dhcp.lan.dhcp_option=option:tzdb-timezone,Europe/Warsaw
+uci commit
+
+service dnsmasq reload
 ```
 
 ### Accept SSH connections from WAN side
